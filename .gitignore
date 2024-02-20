@@ -1,0 +1,8 @@
+################################
+### Dependencies and Tooling ###
+################################
+# Ignore dependencies and build tooling
+node_modules
+
+# Ignore editor config files
+.vscode
