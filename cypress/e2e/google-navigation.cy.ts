@@ -20,7 +20,7 @@ describe("Google Navigation", () => {
     cy.get('[aria-label="Search"]').click().type("HTTP Cats{enter}");
 
     // Ensures that the search results are visible to the user
-    cy.findByText("Search Results").should("be.visible");
+    cy.get('#search > div > h1').should("be.visible");
 
     // Get all search results
     cy.get("#rso")
