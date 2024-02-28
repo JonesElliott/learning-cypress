@@ -1,8 +1,8 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  viewportWidth: 1200,
-  viewportHeight: 860,
+  viewportWidth: 1000,
+  viewportHeight: 660,
   numTestsKeptInMemory: 10, // Save tests in memory for debugging
   e2e: {
     specPattern: ["**/*.feature", "**/*.cy.ts"],

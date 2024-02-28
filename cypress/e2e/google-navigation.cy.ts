@@ -20,22 +20,26 @@ describe("Google Navigation", () => {
     cy.get('[aria-label="Search"]').click().type("HTTP Cats{enter}");
 
     // Ensures that the search results are visible to the user
-    cy.get('#search > div > h1').should("be.visible");
+    cy.get("#search > div > h1").should("be.visible");
 
     // Get all search results
     cy.get("#rso")
       .children()
       .last()
       .children()
-      .eq(2) // Get 3rd which will be our desired search result
+      .eq(1) // First result is in a separate container, this grabs the 3rd result displayed to the user
       .within(() => {
-        cy.get("a").then(($a) => {
-          // get url from href of element
-          const url = $a.prop("href");
-          // assert that we get the expected url
-          expect(url).to.include("https://httpcats.com");
-          // send a request and check that the body returned includes
-          cy.request(url).its("body").should("include", "HTTP Status Cats");
+        cy.get("a")
+          .invoke("attr", "href")
+          .should("include", "https://httpcats.com/"); // Asserts we are getting the expected website
+
+        cy.get("a").click();
+        // cy.origin() allows us to visit domains of a different origin in a single test
+        cy.origin("https://httpcats.com/204", () => {
+          cy.get("body")
+            .find("h1")
+            .should("have.text", "HTTP Status Cats")
+            .and("be.visible");
         });
       });
   });
