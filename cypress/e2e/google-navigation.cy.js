@@ -1,6 +1,7 @@
 import "@testing-library/cypress/add-commands";
 
 beforeEach(() => {
+  // Clear all site data to try to have consistent test results
   cy.clearAllSessionStorage();
   cy.clearAllCookies();
   cy.clearAllLocalStorage();
